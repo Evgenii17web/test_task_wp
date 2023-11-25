@@ -28,20 +28,20 @@ function bags_products( $atts ): string {
 		$atts,
 		'bags_products'
 	);
-
+  // Get products
 	$products = wc_get_products( array(
 		'category' => [ $atts['category'] ],
 		'limit'    => $atts['limit']
 	) );
 	// If there are in tables products return products names
-	if ( ! empty( $products ) ) {
-		$result = "<ul><h3>{$atts['limit']} latest bags</h3>";
+	if ( !empty( $products ) ) {
+		$result = "<ul><h3>{$atts['limit']} latest products from category {$atts['category']}</h3>";
 		foreach ( $products as $product ) {
 			$result .= '<li>' . $product->get_title() . '</li>';
 		}
 		$result .= '</ul>';
 	} else {
-		$result = "There are no {$atts['category']}!";
+		$result = "There are no products in category {$atts['category']}!";
 	}
 
 	return $result;
