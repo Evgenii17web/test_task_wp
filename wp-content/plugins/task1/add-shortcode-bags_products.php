@@ -19,7 +19,6 @@ add_shortcode( 'bags_products', 'bags_products' );
  * @return string
  */
 function bags_products( $atts ): string {
-	global $wpdb;
 	// Add default attributes
 	$atts = shortcode_atts(
 		[
@@ -29,67 +28,29 @@ function bags_products( $atts ): string {
 		$atts,
 		'bags_products'
 	);
-	// Get product name from DB
-	$table_name    = $wpdb->prefix . 'products';
-	$product_names = $wpdb->get_col(
-		$wpdb->prepare(
-			"SELECT product_name FROM $table_name
-        WHERE category = %s
-        LIMIT %d",
-			$atts['category'],
-			$atts['limit']
-		)
-	);
+
+	$products = wc_get_products( array(
+		'category' => [ $atts['category'] ],
+		'limit'    => $atts['limit']
+	) );
 	// If there are in tables products return products names
-	if ( ! empty( $product_names ) ) {
-		$result = '<ul>';
-		foreach ( $product_names as $product_name ) {
-			$result .= '<li>' . $product_name . '</li>';
+	if ( ! empty( $products ) ) {
+		$result = "<ul><h3>{$atts['limit']} latest bags</h3>";
+		foreach ( $products as $product ) {
+			$result .= '<li>' . $product->get_title() . '</li>';
 		}
 		$result .= '</ul>';
 	} else {
-		$result = "There are no bags!";
+		$result = "There are no {$atts['category']}!";
 	}
 
 	return $result;
 }
 
-/**
- * Create products table
- *
- * @return void
- */
-function create_table(): void {
-	global $wpdb;
-
-	// Create table if not exist
-	$table_name = $wpdb->prefix . 'products';
-	if ( $wpdb->get_var( "SHOW TABLES LIKE '$table_name'" ) != $table_name ) {
-		$sql = "CREATE TABLE $table_name (
-        id INT NOT NULL AUTO_INCREMENT,
-        sku VARCHAR(20) NOT NULL,
-        price INT,
-        product_name VARCHAR(50),
-        category VARCHAR(50),
-        PRIMARY KEY (id)
-    )";
-
-		require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
-		dbDelta( $sql );
-
-		// Fill table with dummy data
-		$categories = [ 'bags', 'phones', 'keyboards', 'pens' ];
-		for ($i = 1; $i <= 20; $i++) {
-			$data = [
-				'sku'          => 'sku-' . rand( 1, 100 ),
-				'price'        => rand( 1, 100 ),
-				'product_name' =>  'product-' . rand( 1, 100 ),
-				'category'     => $categories[array_rand( $categories )]
-			];
-			$wpdb->insert( $table_name, $data );
-		}
+register_activation_hook( __FILE__, 'activate_plugin_add_shortcode' );
+function activate_plugin_add_shortcode() {
+	if ( ! is_plugin_active( 'woocommerce/woocommerce.php' ) ) {
+		deactivate_plugins( plugin_basename( __FILE__ ) );
+		wp_die( 'Shortcode bags plugin requires WooCommerce. Please activate WooCommerce and try again.' );
 	}
 }
-
-// Run create_table function during activating plugin
-register_activation_hook( __FILE__, 'create_table' );
