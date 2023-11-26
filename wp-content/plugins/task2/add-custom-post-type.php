@@ -18,7 +18,7 @@ function register_post_type_projects() {
 	$labels = [
 		'name'               => 'Projects',
 		'singular_name'      => 'Project',
-		'add_new'            => 'Add Projects',
+		'add_new'            => 'Add Project',
 		'add_new_item'       => 'Add Project',
 		'edit_item'          => 'Edit Project',
 		'new_item'           => 'New Project',
