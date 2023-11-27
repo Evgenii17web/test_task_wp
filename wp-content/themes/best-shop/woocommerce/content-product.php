@@ -62,7 +62,7 @@ if ( empty( $product ) || ! $product->is_visible() ) {
 	 * @hooked woocommerce_template_loop_product_link_close - 5
 	 * @hooked woocommerce_template_loop_add_to_cart - 10
 	 */
-	//do_action( 'woocommerce_after_shop_loop_item' );
+	do_action( 'woocommerce_after_shop_loop_item' );
 
 	?>
     <div class="custom-cart-btn">
@@ -74,6 +74,12 @@ if ( empty( $product ) || ! $product->is_visible() ) {
 				 */
 				do_action( 'best_shop_loop_add_to_cart' );
 				?>
+    </div>
+    <div class="modal" id="product-modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <div id="modal-content"></div>
+        </div>
     </div>
 	
     <div class="hover-area">
