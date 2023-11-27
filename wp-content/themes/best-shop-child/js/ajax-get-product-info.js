@@ -19,7 +19,6 @@ document.addEventListener('DOMContentLoaded', function() {
         button.addEventListener('click', function() {
             let productId = button.getAttribute('data-show-info-product-id');
 
-            debugger
             jQuery.ajax({
                 type: 'POST',
                 url: ajax_object.ajax_url,
