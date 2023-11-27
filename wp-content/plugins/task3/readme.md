@@ -4,10 +4,10 @@
 ### Instructions on how to add a new custom field “Position” in the user edit page
 
 В файлі `wp-content/plugins/task3/add-position-field-to-customer.php` через хуки  
-`add_action('show_user_profile', 'add_user_position_field');
-add_action('edit_user_profile', 'add_user_position_field');
-add_action('personal_options_update', 'save_user_position_field');
-add_action('edit_user_profile_update', 'save_user_position_field');`
+`add_action('show_user_profile', 'add_user_position_field');`  
+`add_action('edit_user_profile', 'add_user_position_field');`  
+`add_action('personal_options_update', 'save_user_position_field');`  
+`add_action('edit_user_profile_update', 'save_user_position_field');`
 
 плагін додає нове поле `position` в юзер профайл.  
 `add_user_position_field` - рендерить поле  
@@ -22,7 +22,7 @@ add_action('edit_user_profile_update', 'save_user_position_field');`
 
 ### How to add an Elementor template to the end of each article using the PHP function
 
-Файл доічрньої теми `wp-content/themes/best-shop-child/template-parts/content-single.php` переписує файл батьківскої теми. В цьому фалі додана одна строка `<div><?= do_shortcode('[elementor-template id="248"]');?></div>` в якій за допомогою шорткода виводиться темплейт який можно знайти в адмінці в Шаблони -> Збережені шаблони під назвою TT Author static component. Цей темплейт рендерить аватар, ім'я, біографію, позицію(position) юзера та лінку на його профайл.
+Файл доічрньої теми `wp-content/themes/best-shop-child/template-parts/content-single.php` переписує файл батьківскої теми. В цьому файлі додана одна строка `<div><?= do_shortcode('[elementor-template id="248"]');?></div>` в якій за допомогою шорткода виводиться темплейт який можно знайти в адмінці в Шаблони -> Збережені шаблони під назвою TT Author static component. Цей темплейт рендерить аватар, ім'я, біографію, позицію(position) юзера та лінку на його профайл.
 
 Якщо ви використовуєте дамп бази даних ви можете побачити блок з інформацією про автора на сторінках  
 `http://emrg/cooking-healthful-joyful/`  
