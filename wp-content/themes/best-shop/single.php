@@ -28,7 +28,7 @@ get_header();
 
 						endwhile; // End of the loop.
 
-						best_shop_author_box(); 
+//						best_shop_author_box();
 						
 						best_shop_nav(); 
 						
