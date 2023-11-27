@@ -9,7 +9,6 @@ function openModal(productInfo) {
 
 function closeModal() {
     let modal = document.getElementById('product-modal');
-    debugger
     modal.style.display = 'none';
 }
 
