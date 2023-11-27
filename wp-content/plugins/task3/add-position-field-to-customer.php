@@ -6,6 +6,13 @@ Version: 1.0
 Author: Evgen
 */
 
+/**
+ * Add position field in user profile
+ *
+ * @param $user
+ *
+ * @return void
+ */
 function add_user_position_field($user) {
 	?>
 	<h3>
@@ -21,6 +28,13 @@ function add_user_position_field($user) {
 	<?php
 }
 
+/**
+ * Save position field in user profile
+ *
+ * @param $user_id
+ *
+ * @return void
+ */
 function save_user_position_field($user_id) {
 	if (current_user_can('edit_user', $user_id)) {
 		update_user_meta($user_id, 'position', sanitize_text_field($_POST['position']));
@@ -33,6 +47,13 @@ add_action('personal_options_update', 'save_user_position_field');
 add_action('edit_user_profile_update', 'save_user_position_field');
 
 
+/**
+ * Register dynamic tag position
+ *
+ * @param $dynamic_tags
+ *
+ * @return void
+ */
 function register_tags( $dynamic_tags ) {
 	require_once( __DIR__ . '/tags/position.php' );
     $dynamic_tags->register( new task3\tags\position() );

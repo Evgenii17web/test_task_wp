@@ -1,4 +1,5 @@
 <?php
+
 namespace task3\tags;
 
 use Elementor\Modules\DynamicTags\Module as ModuleAlias;
@@ -11,24 +12,48 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 class position extends Tag {
 
-	public function get_name() {
+	/**
+	 * Get dynamic tag name
+	 *
+	 * @return string
+	 */
+	public function get_name(): string {
 		return 'Author Position';
 	}
 
-	public function get_title() {
+	/**
+	 * Get dynamic tag title
+	 * @return string
+	 */
+	public function get_title(): string {
 		return 'Author Position';
 	}
 
-	public function get_group() {
+	/**
+	 * Get dynamic tag group
+	 *
+	 * @return string
+	 */
+	public function get_group(): string {
 		return Module::AUTHOR_GROUP;
 	}
 
-	public function get_categories() {
+	/**
+	 * Get dynamic tag category
+	 *
+	 * @return array
+	 */
+	public function get_categories(): array {
 		return [ ModuleAlias::TEXT_CATEGORY ];
 	}
 
+	/**
+	 * Render dynamic tag
+	 *
+	 * @return void
+	 */
 	public function render() {
-		$author_position = get_the_author_meta('position');
-		echo wp_kses_post($author_position);
+		$author_position = get_the_author_meta( 'position' );
+		echo wp_kses_post( $author_position );
 	}
 }
