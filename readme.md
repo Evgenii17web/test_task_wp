@@ -2,3 +2,8 @@
 ### Завдання 4, 5 в `wp-content/themes/best-shop-child` там також є свій readme з поясненнями коду та відповідями на запитання в п'ятому завданні
 
 ### Краще буде використати дамп бази даних `emrg.sql`
+
+### Environment:  
+OpenServer 5.4.3
+PHP 7.4
+MySQL 5.7
